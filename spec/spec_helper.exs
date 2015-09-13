@@ -1,6 +1,9 @@
-Code.require_file "fixtures.exs", __DIR__
-
 ESpec.start
+
+# Require all files in the `spec/support` directory
+support_dir = Path.join(__DIR__, "support")
+File.ls!(support_dir)
+  |> Enum.each fn(file) -> Code.require_file(file, support_dir) end
 
 ESpec.configure fn(config) ->
 
