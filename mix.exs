@@ -38,7 +38,7 @@ defmodule MealTracker.Mixfile do
       {:coverex, "~> 1.4.1", only: :test},
       {:espec, "~> 0.7.0", only: :test},
       {:earmark, ">= 0.0.0", only: :dev},
-      {:ex_doc, "~> 0.7", only: :dev}
+      {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end
 
