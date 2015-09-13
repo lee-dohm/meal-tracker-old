@@ -57,7 +57,7 @@ This project follows the [GitHub "scripts to rule them all" pattern][scripts-to-
 * `script/test` &mdash; Runs automated tests
 * `script/clean` &mdash; Deletes all generated files
 * `script/console` &mdash; Start the REPL for the project with appropriate libraries already loaded
-* `script/docs` &mdash; Generate and open the developer documentation for the project
+* `script/doc` &mdash; Generate and open the developer documentation for the project
 * `script/install` &mdash; Installs the executable on the system `PATH`
 
 ## Acknowledgements
