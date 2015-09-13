@@ -1,13 +1,12 @@
 defmodule FoodItemSpec do
   use ESpec
+  import Fixtures
 
   alias MealTracker.FoodItem
 
-  let :one_big_mac, do: %FoodItem{name: "Big Mac"}
-
   describe "constructing" do
     context "a simple item" do
-      let :item, do: one_big_mac
+      let :item, do: fixture(:item)
 
       it do: expect(item.name).to eq "Big Mac"
       it do: expect(item.quantity).to eq 1
@@ -17,21 +16,63 @@ defmodule FoodItemSpec do
 
   describe "formatting" do
     context "a simple item" do
-      let :item, do: one_big_mac
+      let :item, do: fixture(:item)
 
       it do: expect(to_string(item)).to eq "1x Big Mac"
     end
 
     context "an item with a quantity" do
-      let :item, do: %FoodItem{one_big_mac | quantity: 5}
+      let :item, do: fixture(:item, quantity: 5)
 
       it do: expect(to_string(item)).to eq "5x Big Mac"
     end
 
     context "an item with quantity and units" do
-      let :item, do: %FoodItem{name: "Pepsi", quantity: 355, unit: :milliliter}
+      let :item, do: fixture(:item, name: "Pepsi", quantity: 355, unit: :milliliter)
 
       it do: expect(to_string(item)).to eq "355 milliliter Pepsi"
+    end
+  end
+
+  describe "parsing" do
+    context "a simple item" do
+      it do: expect(FoodItem.parse("Big Mac")).to eq fixture(:item)
+    end
+
+    context "an item with a simple quantity" do
+      it do: expect(FoodItem.parse("5x Big Mac")).to eq fixture(:item, quantity: 5)
+    end
+
+    context "an item with a non-integer quantity" do
+      it do: expect(FoodItem.parse("5.5x Big Mac")).to eq fixture(:item, quantity: 5.5)
+    end
+
+    context "an item with an invalid quantity" do
+      it do: expect(FoodItem.parse("5.5xyz Big Mac")).to eq fixture(:item, name: "5.5xyz Big Mac")
+    end
+
+    context "an item with quantity and units" do
+      it do
+        item = %FoodItem{name: "Pepsi", quantity: 355, unit: :milliliter}
+
+        expect(FoodItem.parse("355 milliliter Pepsi")).to eq item
+      end
+    end
+
+    context "an item with non-integer quantity and units" do
+      it do
+        item = %FoodItem{name: "Pepsi", quantity: 355.5, unit: :milliliter}
+
+        expect(FoodItem.parse("355.5 milliliter Pepsi")).to eq item
+      end
+    end
+
+    context "an item with an invalid quantity and units" do
+      it do
+        item = %FoodItem{name: "355.5xyz milliliter Pepsi"}
+
+        expect(FoodItem.parse("355.5xyz milliliter Pepsi")).to eq item
+      end
     end
   end
 end
