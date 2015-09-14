@@ -44,6 +44,8 @@ defmodule MealTracker.FoodItem do
   """
   @spec parse(String.t) :: t
   def parse(text) do
+    text = String.strip(text)
+
     cond do
       captures = Regex.named_captures(@item_quantity_pattern, text) -> parse_item_quantity(captures)
       captures = Regex.named_captures(@unit_quantity_pattern, text) -> parse_unit_quantity(captures)

@@ -35,6 +35,14 @@ defmodule FoodItemSpec do
   end
 
   describe "parsing" do
+    it "isn't confused by excess whitesapce" do
+      expect(FoodItem.parse("     Big Mac     ")).to eq fixture(:item)
+    end
+
+    it "isn't confused by numbers in the middle" do
+      expect(FoodItem.parse("Heinz 57 Sauce")).to eq fixture(:item, name: "Heinz 57 Sauce")
+    end
+
     context "a simple item" do
       it do: expect(FoodItem.parse("Big Mac")).to eq fixture(:item)
     end
