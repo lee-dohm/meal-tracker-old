@@ -33,13 +33,13 @@ defmodule MealTracker.FoodItem do
   ## Examples
 
       iex> FoodItem.parse("Big Mac")
-      %MealTracker.FoodItem{name: "Big Mac", quantity: 1, unit: :item}
+      %FoodItem{name: "Big Mac", quantity: 1, unit: :item}
 
       iex> FoodItem.parse("5x Oreo Cookie")
-      %MealTracker.FoodItem{name: "Oreo Cookie", quantity: 5, unit: :item}
+      %FoodItem{name: "Oreo Cookie", quantity: 5, unit: :item}
 
       iex> FoodItem.parse("355 milliliter Pepsi")
-      %MealTracker.FoodItem{name: "Pepsi", quantity: 355, unit: :milliliter}
+      %FoodItem{name: "Pepsi", quantity: 355, unit: :milliliter}
 
   """
   @spec parse(String.t) :: t
@@ -54,7 +54,19 @@ defmodule MealTracker.FoodItem do
   end
 
   @doc """
-  Converts the item to its text representation.
+  Converts the food item to its text representation.
+
+  ## Examples
+
+      iex> FoodItem.to_string(%FoodItem{name: "Big Mac", quantity: 1, unit: :item})
+      "1x Big Mac"
+
+      iex> FoodItem.to_string(%FoodItem{name: "Oreo Cookie", quantity: 5, unit: :item})
+      "5x Oreo Cookie"
+
+      iex> FoodItem.to_string(%FoodItem{name: "Pepsi", quantity: 355, unit: :milliliter})
+      "355 milliliter Pepsi"
+
   """
   @spec to_string(t) :: String.t
   def to_string(item) do
