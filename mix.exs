@@ -12,7 +12,10 @@ defmodule MealTracker.Mixfile do
       start_permanent: Mix.env == :prod,
       preferred_cli_env: [espec: :test],
       deps: deps,
-      escript: escript
+      docs: docs,
+      escript: escript,
+      homepage_url: "https://github.com/lee-dohm/meal-tracker",
+      source_url: "https://github.com/lee-dohm/meal-tracker"
     ]
   end
 
@@ -39,6 +42,13 @@ defmodule MealTracker.Mixfile do
       {:espec, "~> 0.7.0", only: :test},
       {:earmark, ">= 0.0.0", only: :dev},
       {:ex_doc, ">= 0.0.0", only: :dev}
+    ]
+  end
+
+  # Parameters for generating documentation
+  defp docs do
+    [
+      extras: ["README.md", "LICENSE.md"]
     ]
   end
 
