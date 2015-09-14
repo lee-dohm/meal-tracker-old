@@ -43,7 +43,7 @@ defmodule MealTracker.FoodItem do
 
   """
   @spec parse(String.t) :: t
-  def parse(text) do
+  def parse(text) when is_binary(text) do
     text = String.strip(text)
 
     cond do
@@ -52,6 +52,8 @@ defmodule MealTracker.FoodItem do
       true -> %FoodItem{name: text}
     end
   end
+
+  def parse(value), do: raise(MealTracker.ParseError, value)
 
   @doc """
   Converts the food item to its text representation.

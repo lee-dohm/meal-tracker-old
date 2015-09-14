@@ -35,6 +35,10 @@ defmodule FoodItemSpec do
   end
 
   describe "parsing" do
+    it "raises an exception when asked to parse something that isn't text" do
+      expect(fn -> FoodItem.parse(5) end).to raise_exception(MealTracker.ParseError)
+    end
+
     it "isn't confused by excess whitesapce" do
       expect(FoodItem.parse("     Big Mac     ")).to eq fixture(:item)
     end
