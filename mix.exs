@@ -37,9 +37,9 @@ defmodule MealTracker.Mixfile do
   # Type `mix help deps` for more examples and options
   defp deps do
     [
-      {:timex, "~> 0.17.0"},
+      {:timex, "~> 0.19.5"},
       {:coverex, "~> 1.4.1", only: :test},
-      {:espec, "~> 0.7.0", only: :test},
+      {:espec, "~> 0.8.7", only: :test},
       {:earmark, ">= 0.0.0", only: :dev},
       {:ex_doc, ">= 0.0.0", only: :dev}
     ]
