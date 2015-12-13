@@ -1,6 +1,7 @@
 defmodule FoodItemSpec do
   use ESpec
   import Fixtures
+  doctest MealTracker.FoodItem
 
   alias MealTracker.FoodItem
 
