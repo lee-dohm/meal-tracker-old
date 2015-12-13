@@ -2,6 +2,7 @@ defmodule LogEntrySpec do
   use ESpec
   import Fixtures
 
+  alias MealTracker.FoodItem
   alias MealTracker.LogEntry
 
   describe "constructing" do
@@ -23,6 +24,22 @@ defmodule LogEntrySpec do
         entry = LogEntry.add_item(entry, item)
 
         expect(length(entry.items)).to eq 1
+        expect(List.first(entry.items)).to eq %FoodItem{name: "Big Mac"}
+      end
+    end
+
+    context "to an entry with items already" do
+      let :entry do
+        entry = LogEntry.new
+        LogEntry.add_item(entry, item)
+      end
+
+      it "has two items" do
+        entry = LogEntry.add_item(entry, item)
+
+        expect(length(entry.items)).to eq 2
+        expect(List.first(entry.items)).to eq %FoodItem{name: "Big Mac"}
+        expect(List.last(entry.items)).to eq %FoodItem{name: "Big Mac"}
       end
     end
   end
